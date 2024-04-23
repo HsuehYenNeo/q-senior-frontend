@@ -1,0 +1,9 @@
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 1rem;
+  .pagination-text {
+    font-size: 0.8rem;
+  }
+}

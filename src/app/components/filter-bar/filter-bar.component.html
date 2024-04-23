@@ -1,0 +1,30 @@
+<div class="filter-bar-placeholder">
+    <div class="filter-button">
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select [(value)]="selectedTypes" multiple (selectionChange)="applyFilters()">
+          <mat-option *ngFor="let type of types" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter-button">
+      <mat-form-field class="filter-btn-container" appearance="outline">
+        <mat-label>Currency</mat-label>
+        <mat-select [(value)]="selectedCurrency" multiple (selectionChange)="applyFilters()">
+          <mat-option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter-button">
+      <mat-form-field class="filter-btn-container" appearance="outline">
+        <mat-label>Private?</mat-label>
+        <mat-select [(value)]="selectedIsPrivate" (selectionChange)="applyFilters()">
+            <mat-option *ngFor="let option of [{ value: undefined, viewValue: 'All' }, { value: true, viewValue: 'Yes' }, { value: false, viewValue: 'No' }]" [value]="option.value">
+                {{ option.viewValue }}
+              </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button class="clear-btn" mat-raised-button color="primary" (click)="clearFilters()">Clear Filters</button>
+  </div>
+  

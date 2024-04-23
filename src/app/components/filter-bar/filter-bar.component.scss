@@ -1,0 +1,20 @@
+.filter-bar-placeholder {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  
+  @media (min-width: 900px) {
+    flex-direction: row;
+    padding: 20px;
+  }
+}
+.filter-button {
+  @media (min-width: 900px) {
+    margin: 10px;
+  }
+} 
+.clear-btn {
+  margin: 10px;
+}

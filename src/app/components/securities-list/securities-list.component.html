@@ -1,6 +1,29 @@
-﻿<filterable-table
+﻿<!--FITLER BAR-->
+<filter-bar 
+  [types]="types"
+  [currencies]="currencies"
+  [selectedTypes]="selectedTypes"
+  [selectedCurrency]="selectedCurrency"
+  [selectedIsPrivate]="selectedIsPrivate"
+  (clearFiltersEvent)="onClearFilters()"
+  (filtersChanged)="onFiltersChanged($event)">
+</filter-bar>
+
+<!--PAGINATOR-->
+<div class="pagination-container">
+  <button mat-icon-button aria-label="Previous icon" [disabled]="isFirstPage()" (click)="getPreviousSlice()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <span class="pagination-text"> Showing {{ currentItemsLength }} out of {{ filteredSecuritiesLength }} {{ filteredSecuritiesLength > 1 ? 'items': 'item'}} </span> 
+  <button mat-icon-button aria-label="Next icon" [disabled]="isLastPage()" (click)="getNextSlice()">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>
+
+<!--TABLE-->
+<filterable-table
   class="security-list"
-  [dataSource]="securities$ | async"
+  [dataSource]="filteredSecurities$ | async"
   [isLoading]="loadingSecurities$ | async">
 
   <ng-container matColumnDef="name">
@@ -11,13 +34,19 @@
   <ng-container matColumnDef="type">
     <th mat-header-cell *matHeaderCellDef> Type </th>
     <td mat-cell *matCellDef="let security"> {{ security.type }} </td>
-  </ng-container>
-
+  </ng-container> 
   <ng-container matColumnDef="currency">
     <th mat-header-cell *matHeaderCellDef> Currency </th>
     <td mat-cell *matCellDef="let security"> {{ security.currency }} </td>
   </ng-container>
-
+  <ng-container matColumnDef="isPrivate">
+    <th mat-header-cell *matHeaderCellDef>
+      Is Private
+      
+    </th>
+    <td mat-cell *matCellDef="let security"> {{ security.isPrivate ? 'Yes' : 'No' }} </td>
+  </ng-container>
+  
   <!-- Custom row definitions to be provided to the wrapper table. -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -27,3 +56,5 @@
     <td class="mat-cell" colspan="3"><i>No data</i></td>
   </tr>
 </filterable-table>
+
+
